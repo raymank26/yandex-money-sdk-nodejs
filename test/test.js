@@ -1,5 +1,9 @@
 var assert = require("assert");
 var yandex_money = require("../index");
+var constants = require("./constants");
+
+var accessToken = constants.accessToken;
+var clientId = constants.clientId;
 
 var Wallet = yandex_money.Wallet;
 var ExternalPayment = yandex_money.ExternalPayment;
