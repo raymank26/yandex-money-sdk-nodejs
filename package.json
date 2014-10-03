@@ -1,0 +1,16 @@
+{
+  "name": "yandex_money_sdk",
+  "version": "0.0.1",
+  "description": "SDK for working with yandex money API",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "yandex",
+    "money",
+    "sdk"
+  ],
+  "author": "NBCO Yandex.Money LLC <ermak@yamoney.ru>",
+  "license": "MIT"
+}
