@@ -11,6 +11,9 @@
     "money",
     "sdk"
   ],
+  "dependencies": {
+    "request": "2.9.x"
+  },
   "author": "NBCO Yandex.Money LLC <ermak@yamoney.ru>",
   "license": "MIT"
 }
