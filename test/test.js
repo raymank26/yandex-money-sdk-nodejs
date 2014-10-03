@@ -118,14 +118,76 @@ describe('Wallet', function(){
 });
 
 describe("External payment", function () {
-
-  describe("#externalPayment", function () {
-    it("should request external payment", function(done) {
+  var request_id = null;
+  var instance_id = null;
+  describe("#getInstanceId", function () {
+    it("should get instance id", function(done) {
       ExternalPayment.getInstanceId(clientId, function(error, data) {
         assert.equal(data.status, "success");
+        instance_id = data.instance_id;
         done();
       });
     });
+  });
+
+  describe("#request", function () {
+    it("should make request external payment", function(done) {
+      var requestComplete = function (error, data, response) {
+        assert.equal(response.statusCode, 200);
+        request_id = data.request_id;
+        //assert.equal(data.request_id, "p2p-test");
+        // TODO: add assertion
+        done();
+      };
+      var requestOptions = {
+        "pattern_id": "p2p",
+        "to": "410011161616877",
+        "amount_due": "0.02",
+        "comment": "test payment comment from yandex-money-nodejs",
+        "message": "test payment message from yandex-money-nodejs",
+        "label": "testPayment",
+      };
+      var api = new ExternalPayment(instance_id);
+      api.request(requestOptions, requestComplete);
+    });
+  });
+
+  describe("#process", function () {
+    it("should make a process payment", function (done) {
+      var api = new ExternalPayment(instance_id);
+      var processComplete = function (error, data, response) {
+        assert.equal(response.statusCode, 200);
+        assert.equal(data.status, "ext_auth_required");
+        done();
+
+      };
+      api.process({
+        request_id: request_id,
+        ext_auth_success_uri: "http://lcoalhost:8000",
+        ext_auth_fail_uri: "http://localhost:8000"
+      }, processComplete);
+    });
+    
+  });
+
+  describe("#exceptions", function () {
+    it("should return TokenError in Wallet.revokeToken", function (done) {
+      var api = new Wallet("somemisspelledtoken");
+      Wallet.revokeToken("somemisspelledtoken", null,
+          function myCallback (error) {
+        assert.equal(error.message, "Token error");
+        done();
+      });
+    });
+
+    it("should return ScopeError", function (done) {
+      var api = new Wallet("some invalid token");
+      api.accountInfo(function myCallback (error) {
+        assert.equal(error.message, "Format error");
+        done();
+      });
+    });
+    
   });
   
 });
