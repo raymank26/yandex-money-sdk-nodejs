@@ -1,0 +1,4 @@
+module.exports = {
+  accessToken: "FILL_ME",
+  clientId: "FILL_ME"
+};
