@@ -4,7 +4,7 @@
  before_install:
    - openssl aes-256-cbc -K $encrypted_bd8aa6273b70_key -iv $encrypted_bd8aa6273b70_iv -in constants.js.enc -out test/constants.js -d
  before_script:
-   - npm install instanbul -g # code coverage tool
+   - npm install istanbul -g # code coverage tool
    - npm install coveralls -g # code coverage submitting
  script:
    - istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec
