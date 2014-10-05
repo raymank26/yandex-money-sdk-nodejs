@@ -9,6 +9,7 @@ var Wallet = yandex_money.Wallet;
 var ExternalPayment = yandex_money.ExternalPayment;
 
 describe('Wallet', function(){
+  this.timeout(5000);
 
   describe('#utils', function(){
     it('should return auth url for browser redirect', function(){
