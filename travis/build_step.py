@@ -12,7 +12,7 @@ command = "openssl aes-256-cbc -K {} -iv {} -in {} -out test/constants.js -d".fo
               os.environ.get('encrypted_bd8aa6273b70_iv', "key2"),
               encrypted_filename)
 
-if(len(sys.argv) > 0 and sys.argv[1] == "debug"):
+if(len(sys.argv) > 1 and sys.argv[1] == "debug"):
     print(command)
 else:
     os.system(command)
