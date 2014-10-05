@@ -17,7 +17,7 @@
 
 ### Installation
 
-Simply run `npm install yandex-money`
+Simply run `npm install yandex-money-sdk`
 
 ### Payments from the Yandex.Money wallet
 
