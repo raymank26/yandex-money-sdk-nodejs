@@ -2,12 +2,13 @@
 import os
 import sys
 
-if "yandex-money" in os.environ['TRAVIS_REPO_SLUG']:
-    encrypted_filename = "constants.js.enc.yamoney"
-else:
+if "raymank26/" in os.environ['TRAVIS_REPO_SLUG']:
     encrypted_filename = "constants.js.enc"
+else:
+    encrypted_filename = "constants.js.enc.yamoney"
 
-print("file to decrypt = ".format(encrypted_filename))
+print("file to decrypt = {}".format(encrypted_filename))
+sys.exit(0)
 
 command = "openssl aes-256-cbc -K {} -iv {} -in {} -out test/constants.js -d".format(
               os.environ.get('encrypted_bd8aa6273b70_key'),
